@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Toko Marshmallow Online - Nikmati aneka rasa marshmallow lembut dan lezat">
+    <title>Toko Marshmallow - Belanja Online</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/user.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="user-header">
+        <div class="container">
+            <div class="store-logo">
+                <span>🍬</span>
+                <span>Marshmallow Store</span>
+            </div>
+            <div style="display: flex; gap: 1rem; align-items: center;">
+                <button class="btn btn-ghost cart-button" id="cartBtn">
+                    🛒 Keranjang
+                    <span class="cart-badge" id="cartBadge">0</span>
+                </button>
+                <a href="index.html" class="btn btn-ghost">← Kembali</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Section -->
+        <section class="hero-section fade-in">
+            <h1 class="hero-title">Marshmallow Lembut & Lezat</h1>
+            <p class="hero-subtitle">
+                Nikmati kelembutan marshmallow premium dengan berbagai varian rasa pilihan
+            </p>
+        </section>
+
+        <!-- Search Bar -->
+        <div class="search-section fade-in">
+            <input type="text" id="searchInput" class="search-input-user" placeholder="🔍 Cari produk marshmallow...">
+        </div>
+
+        <!--Category Filter -->
+        <div class="category-filter fade-in">
+            <button class="category-btn active" data-category="all">
+                🌟 Semua Produk
+            </button>
+            <button class="category-btn" data-category="makanan">
+                🍔 Makanan & Minuman
+            </button>
+            <button class="category-btn" data-category="fashion">
+                👕 Fashion
+            </button>
+            <button class="category-btn" data-category="aksesori">
+                💍 Aksesori
+            </button>
+            <button class="category-btn" data-category="dekorasi">
+                🎨 Dekorasi
+            </button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be inserted here -->
+        </div>
+    </main>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-backdrop" id="cartBackdrop"></div>
+    <aside class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h2 class="cart-title">Keranjang Belanja</h2>
+            <button class="cart-close" id="closeCartBtn">&times;</button>
+        </div>
+
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be inserted here -->
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span class="cart-total-amount" id="cartTotal">Rp 0</span>
+            </div>
+            <button class="btn btn-primary" style="width: 100%;" id="checkoutBtn">
+                Checkout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Product Detail Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalProductName">Detail Produk</h3>
+                <button class="modal-close" id="closeModalBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg);">
+                    <div>
+                        <img id="modalProductImage" src="" alt=""
+                            style="width: 100%; border-radius: var(--radius-md); border: 2px solid var(--glass-border);">
+                    </div>
+                    <div>
+                        <div style="margin-bottom: var(--spacing-md);">
+                            <span class="badge badge-primary" id="modalProductCategory"></span>
+                        </div>
+                        <div style="margin-bottom: var(--spacing-md);">
+                            <div
+                                style="font-size: var(--font-size-xs); color: var(--text-tertiary); margin-bottom: var(--spacing-xs);">
+                                Harga
+                            </div>
+                            <div style="font-size: var(--font-size-3xl); font-weight: 800; background: var(--success-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                                id="modalProductPrice">
+                            </div>
+                        </div>
+                        <div style="margin-bottom: var(--spacing-md);">
+                            <div
+                                style="font-size: var(--font-size-xs); color: var(--text-tertiary); margin-bottom: var(--spacing-xs);">
+                                Stok Tersedia
+                            </div>
+                            <div style="font-weight: 600;" id="modalProductStock"></div>
+                        </div>
+                        <div style="margin-bottom: var(--spacing-lg);">
+                            <div
+                                style="font-size: var(--font-size-xs); color: var(--text-tertiary); margin-bottom: var(--spacing-xs);">
+                                Deskripsi
+                            </div>
+                            <p style="color: var(--text-secondary);" id="modalProductDescription"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelModalBtn">Tutup</button>
+                <button class="btn btn-primary" id="addToCartFromModal">
+                    + Tambah ke Keranjang
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Success Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal" style="max-width: 500px; text-align: center;">
+            <div class="modal-header">
+                <h3 class="modal-title">Checkout Berhasil!</h3>
+                <button class="modal-close" id="closeCheckoutModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div style="font-size: 5rem; margin: var(--spacing-lg) 0;">✅</div>
+                <h3 style="margin-bottom: var(--spacing-md);">Terima Kasih!</h3>
+                <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md);">
+                    Pesanan Anda telah berhasil diproses.
+                </p>
+                <div
+                    style="background: var(--surface); padding: var(--spacing-md); border-radius: var(--radius-md); border: 1px solid var(--glass-border);">
+                    <div
+                        style="font-size: var(--font-size-sm); color: var(--text-tertiary); margin-bottom: var(--spacing-xs);">
+                        Total Pembayaran
+                    </div>
+                    <div style="font-size: var(--font-size-2xl); font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                        id="checkoutTotal">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" style="width: 100%;" id="continueShoppingBtn">
+                    Lanjut Belanja
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/user.js"></script>
+</body>
+
+</html>

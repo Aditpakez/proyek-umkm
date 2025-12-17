@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Toko Marshmallow Online - Aneka rasa marshmallow lembut dan lezat">
+  <title>Toko Marshmallow - Marshmallow Lembut & Lezat</title>
+  <link rel="stylesheet" href="styles/main.css">
+  <style>
+    .landing-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-lg);
+    }
+
+    .landing-content {
+      text-align: center;
+      max-width: 1000px;
+    }
+
+    .landing-hero {
+      margin-bottom: var(--spacing-2xl);
+    }
+
+    .landing-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: var(--spacing-md);
+      line-height: 1.1;
+    }
+
+    .landing-subtitle {
+      font-size: var(--font-size-xl);
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .landing-description {
+      font-size: var(--font-size-base);
+      color: var(--text-tertiary);
+      max-width: 600px;
+      margin: 0 auto var(--spacing-xl);
+    }
+
+    .portal-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--spacing-lg);
+      margin-top: var(--spacing-2xl);
+    }
+
+    .portal-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--radius-xl);
+      padding: var(--spacing-2xl);
+      text-align: center;
+      transition: all var(--transition-base);
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .portal-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--primary-gradient);
+      transform: scaleX(0);
+      transition: transform var(--transition-base);
+    }
+
+    .portal-card:nth-child(2)::before {
+      background: var(--success-gradient);
+    }
+
+    .portal-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .portal-card:hover {
+      transform: translateY(-12px);
+      box-shadow: var(--shadow-xl);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--primary-color);
+    }
+
+    .portal-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--spacing-md);
+      background: var(--primary-gradient);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .portal-card:nth-child(2) .portal-icon {
+      background: var(--success-gradient);
+      animation-delay: 0.5s;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .portal-title {
+      font-size: var(--font-size-2xl);
+      font-weight: 700;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .portal-desc {
+      color: var(--text-secondary);
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .portal-features {
+      list-style: none;
+      text-align: left;
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .portal-features li {
+      padding: var(--spacing-xs) 0;
+      color: var(--text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .portal-features li::before {
+      content: '✓';
+      color: var(--success-color);
+      font-weight: 700;
+      margin-right: var(--spacing-xs);
+    }
+
+    .feature-highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-2xl);
+      padding-top: var(--spacing-2xl);
+      border-top: 1px solid var(--glass-border);
+    }
+
+    .feature-item {
+      text-align: center;
+      padding: var(--spacing-md);
+    }
+
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: var(--spacing-sm);
+    }
+
+    .feature-text {
+      font-size: var(--font-size-sm);
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="landing-page">
+    <div class="landing-content">
+      <div class="landing-hero fade-in">
+        <h1 class="landing-title">Toko Marshmallow</h1>
+        <p class="landing-subtitle">Marshmallow Lembut dengan Berbagai Rasa Pilihan</p>
+        <p class="landing-description">
+          Nikmati kelembutan marshmallow premium dengan berbagai varian rasa yang menggugah selera.
+          Dari classic chocolate hingga special Christmas edition!
+        </p>
+      </div>
+
+      <div class="portal-cards">
+        <a href="admin.html" class="portal-card fade-in">
+          <div class="portal-icon">🔧</div>
+          <h2 class="portal-title">Admin Panel</h2>
+          <p class="portal-desc">Kelola stok marshmallow dengan mudah</p>
+          <ul class="portal-features">
+            <li>Tambah & Edit Varian Rasa</li>
+            <li>Manajemen Stok Marshmallow</li>
+            <li>Dashboard Penjualan</li>
+            <li>Filter & Pencarian Produk</li>
+          </ul>
+          <button class="btn btn-primary">
+            Masuk ke Admin →
+          </button>
+        </a>
+
+        <a href="user.html" class="portal-card fade-in" style="animation-delay: 0.1s;">
+          <div class="portal-icon">🛍️</div>
+          <h2 class="portal-title">Toko Marshmallow</h2>
+          <p class="portal-desc">Belanja marshmallow favoritmu</p>
+          <ul class="portal-features">
+            <li>Katalog Lengkap Semua Rasa</li>
+            <li>Keranjang Belanja Praktis</li>
+            <li>Filter Berdasarkan Rasa</li>
+            <li>Checkout Mudah & Cepat</li>
+          </ul>
+          <button class="btn btn-success">
+            Mulai Belanja →
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Panel - Kelola stok marshmallow dengan mudah">
+    <title>Admin Panel - Toko Marshmallow</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/admin.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="admin-logo">
+                <span>🔧</span>
+                <span>Admin Panel</span>
+            </div>
+            <a href="index.html" class="btn btn-ghost">← Kembali</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Dashboard Stats -->
+        <div class="dashboard-stats fade-in">
+            <div class="stat-card">
+                <div class="stat-label">Total Marshmallow</div>
+                <div class="stat-value" id="totalProducts">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Nilai Stok</div>
+                <div class="stat-value" id="totalValue">Rp 0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Unit Stok</div>
+                <div class="stat-value" id="totalStock">0</div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">Kelola Marshmallow</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari produk...">
+                </div>
+                <button class="btn btn-primary" id="addProductBtn">
+                    + Tambah Marshmallow
+                </button>
+            </div>
+
+            <div class="table-container fade-in">
+                <table class="products-table" id="productsTable">
+                    <thead>
+                        <tr>
+                            <th>Gambar</th>
+                            <th>Nama Produk</th>
+                            <th>Kategori</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <!-- Products will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Tambah Produk</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="productId">
+
+                    <div class="form-group">
+                        <label class="form-label" for="productName">Nama Marshmallow *</label>
+                        <input type="text" id="productName" class="form-input"
+                            placeholder="Contoh: Marshmallow Chocolate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productCategory">Kategori *</label>
+                        <select id="productCategory" class="form-select" required>
+                            <option value="">Pilih Kategori</option>
+                            <option value="makanan">Makanan & Minuman</option>
+                            <option value="fashion">Fashion</option>
+                            <option value="aksesori">Aksesori</option>
+                            <option value="dekorasi">Dekorasi & Kerajinan</option>
+                            <option value="lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productPrice">Harga (Rp) *</label>
+                        <input type="number" id="productPrice" class="form-input" placeholder="50000" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productStock">Stok *</label>
+                        <input type="number" id="productStock" class="form-input" placeholder="100" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productDescription">Deskripsi *</label>
+                        <textarea id="productDescription" class="form-textarea"
+                            placeholder="Deskripsi marshmallow yang menarik..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productImage">URL Gambar</label>
+                        <input type="url" id="productImage" class="form-input"
+                            placeholder="https://example.com/image.jpg">
+                        <small style="color: var(--text-tertiary); font-size: var(--font-size-xs);">
+                            Kosongkan untuk menggunakan gambar default
+                        </small>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-ghost" id="cancelBtn">Batal</button>
+                <button type="submit" form="productForm" class="btn btn-primary" id="saveBtn">
+                    Simpan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Konfirmasi Hapus</h3>
+                <button class="modal-close" id="closeDeleteModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus produk <strong id="deleteProductName"></strong>?</p>
+                <p style="color: var(--accent-color); font-size: var(--font-size-sm);">
+                    ⚠️ Tindakan ini tidak dapat dibatalkan.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelDeleteBtn">Batal</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
