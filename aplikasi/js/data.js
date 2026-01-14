@@ -14,6 +14,7 @@ function initializeData() {
 
   if (existingProducts.length === 0) {
     const seedProducts = [
+      // MAKANAN
       {
         id: generateId(),
         name: 'Marshmallow Chocolate',
@@ -34,24 +35,6 @@ function initializeData() {
       },
       {
         id: generateId(),
-        name: 'Marshmallow Espresso',
-        category: 'makanan',
-        price: 20000,
-        stock: 100,
-        description: 'Marshmallow premium dengan rasa espresso yang bold, ideal untuk pecinta kopi sejati.',
-        image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=400'
-      },
-      {
-        id: generateId(),
-        name: 'Marshmallow Latte',
-        category: 'makanan',
-        price: 15000,
-        stock: 100,
-        description: 'Marshmallow lembut dengan rasa latte yang smooth dan creamy, cocok untuk semua usia.',
-        image: 'https://images.unsplash.com/photo-1590080874088-eec64895b423?w=400'
-      },
-      {
-        id: generateId(),
         name: 'Marshmallow Matcha',
         category: 'makanan',
         price: 15000,
@@ -61,39 +44,12 @@ function initializeData() {
       },
       {
         id: generateId(),
-        name: 'Marshmallow Crème Brûlée',
-        category: 'makanan',
-        price: 17000,
-        stock: 100,
-        description: 'Marshmallow eksklusif dengan rasa crème brûlée yang mewah dan karamel yang lezat.',
-        image: 'https://images.unsplash.com/photo-1511381939415-e44015466834?w=400'
-      },
-      {
-        id: generateId(),
-        name: 'Marshmallow Pudding',
-        category: 'makanan',
-        price: 20000,
-        stock: 100,
-        description: 'Marshmallow super lembut dengan rasa pudding klasik yang manis dan creamy.',
-        image: 'https://images.unsplash.com/photo-1486427944299-d1955d23e34d?w=400'
-      },
-      {
-        id: generateId(),
         name: 'Marshmallow Tiramisu',
         category: 'makanan',
         price: 15000,
         stock: 100,
         description: 'Marshmallow inspired oleh dessert Italia legendaris dengan rasa kopi dan mascarpone.',
         image: 'https://images.unsplash.com/photo-1612182062422-2c7f53c3b6af?w=400'
-      },
-      {
-        id: generateId(),
-        name: 'Marshmallow Christmas Special',
-        category: 'makanan',
-        price: 25000,
-        stock: 80,
-        description: 'Marshmallow edisi spesial Natal dengan kombinasi rasa festive yang limited edition!',
-        image: 'https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=400'
       },
       {
         id: generateId(),
@@ -113,14 +69,60 @@ function initializeData() {
         description: 'Marshmallow premium rasa red velvet dengan hint of cocoa dan cream cheese.',
         image: 'https://images.unsplash.com/photo-1601000938365-1c6e0bafe55e?w=400'
       },
+      // MINUMAN
       {
         id: generateId(),
-        name: 'Marshmallow Strawberry',
-        category: 'makanan',
+        name: 'Es Kopi Susu',
+        category: 'minuman',
+        price: 18000,
+        stock: 50,
+        description: 'Perpaduan espresso dengan susu fresh yang creamy, disajikan dengan es batu yang menyegarkan.',
+        image: 'assets/images/es_kopi_susu.webp'
+      },
+      {
+        id: generateId(),
+        name: 'Americano Ice',
+        category: 'minuman',
         price: 15000,
-        stock: 100,
-        description: 'Marshmallow dengan rasa strawberry segar alami, manis dan fruity yang menyegarkan.',
-        image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=400'
+        stock: 50,
+        description: 'Kopi americano murni dengan es, cocok untuk pecinta kopi yang suka rasa bold dan strong.',
+        image: 'assets/images/americano_ice.webp'
+      },
+      {
+        id: generateId(),
+        name: 'Matcha Latte',
+        category: 'minuman',
+        price: 22000,
+        stock: 40,
+        description: 'Green tea matcha premium dengan susu creamy, bisa disajikan hangat atau dingin.',
+        image: 'assets/images/matcha_latte.webp'
+      },
+      {
+        id: generateId(),
+        name: 'Jus Jeruk Segar',
+        category: 'minuman',
+        price: 12000,
+        stock: 60,
+        description: 'Jus jeruk segar diperas langsung dari buah, tanpa gula tambahan, menyegarkan dan sehat.',
+        image: 'assets/images/jus_jeruk.webp'
+      },
+      {
+        id: generateId(),
+        name: 'Coklat Ice',
+        category: 'minuman',
+        price: 20000,
+        stock: 45,
+        description: 'Minuman coklat premium dengan whipped cream, cocok untuk pencinta rasa manis dan creamy.',
+        image: 'assets/images/coklat_ice.webp'
+      },
+      {
+        id: generateId(),
+        name: 'Thai Tea',
+        category: 'minuman',
+        price: 18000,
+        stock: 55,
+        description: 'Teh Thailand klasik dengan susu creamy, rasa manis yang khas dan menyegarkan.',
+        image: 'assets/images/thai_tea.webp'
       }
     ];
 
