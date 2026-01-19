@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Panel - Kelola stok marshmallow dengan mudah">
+    <title>Admin Panel - Toko Marshmallow</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <style>
+        /* Image Upload Styles */
+        .image-upload-wrapper {
+            border: 2px dashed var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: var(--spacing-lg);
+            text-align: center;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            background: var(--surface);
+        }
+
+        .image-upload-wrapper:hover {
+            border-color: var(--primary-color);
+            background: var(--surface-hover);
+        }
+
+        .image-upload-wrapper.dragover {
+            border-color: var(--primary-color);
+            background: rgba(102, 126, 234, 0.1);
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+            opacity: 0.6;
+        }
+
+        .upload-text {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+        }
+
+        .upload-hint {
+            color: var(--text-tertiary);
+            font-size: var(--font-size-xs);
+            margin-top: var(--spacing-xs);
+        }
+
+        #productImage {
+            display: none;
+        }
+
+        #imagePreviewContainer {
+            display: none;
+            position: relative;
+            margin-top: var(--spacing-md);
+        }
+
+        .image-preview {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            border: 2px solid var(--glass-border);
+        }
+
+        .btn-remove-image {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f5576c 0%, #f093fb 100%);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            transition: transform var(--transition-fast);
+        }
+
+        .btn-remove-image:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="admin-header">
+        <div class="container">
+            <div class="admin-logo">
+                <span>🔧</span>
+                <span>Admin Panel</span>
+            </div>
+            <a href="index.html" class="btn btn-ghost">← Kembali</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Dashboard Stats -->
+        <div class="dashboard-stats fade-in">
+            <div class="stat-card">
+                <div class="stat-label">Total Marshmallow</div>
+                <div class="stat-value" id="totalProducts">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Nilai Stok</div>
+                <div class="stat-value" id="totalValue">Rp 0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Total Unit Stok</div>
+                <div class="stat-value" id="totalStock">0</div>
+            </div>
+        </div>
+
+        <!-- Products Section -->
+        <section class="products-section">
+            <div class="section-header">
+                <h2 class="section-title">Kelola Marshmallow</h2>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" class="search-input" placeholder="🔍 Cari produk...">
+                </div>
+                <button class="btn btn-primary" id="addProductBtn">
+                    + Tambah Marshmallow
+                </button>
+            </div>
+
+            <div class="table-container fade-in">
+                <table class="products-table" id="productsTable">
+                    <thead>
+                        <tr>
+                            <th>Gambar</th>
+                            <th>Nama Produk</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productsTableBody">
+                        <!-- Products will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalTitle">Tambah Produk</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="productForm">
+                    <input type="hidden" id="productId">
+
+                    <div class="form-group">
+                        <label class="form-label" for="productName">Nama Marshmallow *</label>
+                        <input type="text" id="productName" class="form-input"
+                            placeholder="Contoh: Marshmallow Chocolate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productPrice">Harga (Rp) *</label>
+                        <input type="number" id="productPrice" class="form-input" placeholder="50000" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productStock">Stok *</label>
+                        <input type="number" id="productStock" class="form-input" placeholder="100" min="0" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="productDescription">Deskripsi *</label>
+                        <textarea id="productDescription" class="form-textarea"
+                            placeholder="Deskripsi marshmallow yang menarik..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Gambar Produk</label>
+                        <div class="image-upload-wrapper" onclick="document.getElementById('productImage').click()">
+                            <div class="upload-icon">📷</div>
+                            <div class="upload-text">Klik atau drag & drop gambar di sini</div>
+                            <div class="upload-hint">JPG, PNG, GIF, WebP (maks. 5MB)</div>
+                        </div>
+                        <input type="file" id="productImage" accept="image/jpeg,image/png,image/gif,image/webp">
+                        <div id="imagePreviewContainer"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-ghost" id="cancelBtn">Batal</button>
+                <button type="submit" form="productForm" class="btn btn-primary" id="saveBtn">
+                    Simpan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal" style="max-width: 400px;">
+            <div class="modal-header">
+                <h3 class="modal-title">Konfirmasi Hapus</h3>
+                <button class="modal-close" id="closeDeleteModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Apakah Anda yakin ingin menghapus produk <strong id="deleteProductName"></strong>?</p>
+                <p style="color: var(--accent-color); font-size: var(--font-size-sm);">
+                    ⚠️ Tindakan ini tidak dapat dibatalkan.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" id="cancelDeleteBtn">Batal</button>
+                <button class="btn btn-danger" id="confirmDeleteBtn">Hapus</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/data.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+
+</html>
