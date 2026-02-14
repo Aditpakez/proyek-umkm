@@ -12,7 +12,7 @@ Sebuah aplikasi web sederhana untuk membantu UMKM yang menjual Marshmallow
 Fungsinya ialah unutk memenuhi tugas kami sebagai anggota UKM Programming, yakni membuat pemograman CRUD (Create, Read, Update, Delete) 
 
 # Bagaimana Cara Mengakses web kami?
-[Tautan Tugas Akhir kelompok Pemula](https://workmarshmallow.netlify.app)
+[Tautan Tugas Akhir kelompok Pemula](https://proyekumkm.netlify.app/)
 Link ini dapat diakses dari  desktop maupun mobile
 
 # Bahasa Pemmograman Apa Saja yang Digunakan Untuk pembuatan Web ini?
